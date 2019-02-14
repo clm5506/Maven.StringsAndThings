@@ -1,5 +1,6 @@
 package io.zipcoder;
 
+import java.util.ArrayList;
 
 /**
  * @author tariq
@@ -15,7 +16,25 @@ public class StringsAndThings {
      *           countYZ("day fyyyz"); // Should return 2
      */
     public Integer countYZ(String input){
-        return null;
+
+        int counter = 0;
+
+        //change the String input provided as an argument into a String[]
+        String[] inputToArray = input.toLowerCase().split(" ");
+
+        //for each loop iterating through the String[] created above
+        for(String str : inputToArray) {
+            //get the last char in the String str variable
+            char lastChar = str.charAt((str.length()-1));
+            //if the lastChar variable is equal
+            if(lastChar == 'z'|| lastChar == 'y'){
+            //then increment the counter
+            counter++;
+
+            }
+        }
+
+        return counter;
     }
 
     /**
@@ -28,7 +47,8 @@ public class StringsAndThings {
      *           removeString("Hello there", "x") // Should return "Hello there"
      */
     public String removeString(String base, String remove){
-        return null;
+
+        return base.replace(remove,"");
     }
 
     /**
@@ -39,8 +59,40 @@ public class StringsAndThings {
      *           containsEqualNumberOfIsAndNot("This is notnot") // Should return true
      *           containsEqualNumberOfIsAndNot("noisxxnotyynotxisi") // Should return true
      */
-    public Boolean containsEqualNumberOfIsAndNot(String input){
-        return null;
+    public Boolean containsEqualNumberOfIsAndNot(String input) {
+
+        String is = "is";
+        String not = "not";
+
+        input = input.toLowerCase();
+
+        int countOfIs = calculateCountOfString(input, is);
+        int countOfNot = calculateCountOfString(input, not);
+
+        return countOfIs==countOfNot;
+
+    }
+
+    private int calculateCountOfString(String input, String word) {
+
+        StringBuilder strBuilder = new StringBuilder(input);
+
+        int wordCounter = 0;
+
+        int index = strBuilder.indexOf(word);
+
+        while (true) {
+
+            if (index == -1) {
+                break;
+
+            } else {
+              index = strBuilder.indexOf(word, index + word.length());
+                wordCounter++;
+
+            }
+        }  return wordCounter;
+
     }
 
     /**
@@ -51,7 +103,18 @@ public class StringsAndThings {
      *           gHappy("xxggyygxx") // Should return  false
      */
     public Boolean gIsHappy(String input){
-        return null;
+        boolean myBool = false;
+        input = input.toLowerCase();
+
+        StringBuilder striBuilder = new StringBuilder(input);
+
+        int index = striBuilder.indexOf("gg");
+        if(index == -1) {
+            return false;
+        } else {
+            return true;
+        }
+
     }
 
 
@@ -63,6 +126,34 @@ public class StringsAndThings {
      *            countTriple("a") // Should return 0
      */
     public Integer countTriple(String input){
-        return null;
-    }
+
+        //make all letters in put lowercase
+        input = input.toLowerCase();
+
+        String[] inputArray = input.split("");
+
+        String previousValue = inputArray[0];
+
+        int counter = 0;
+        int tripletCounter = 0;
+
+
+            for (int i = 1; i < inputArray.length-1; i++) {
+                counter++;
+
+                if (previousValue.equals(inputArray[i]) && previousValue.equals(inputArray[i + 1])) {
+                    previousValue = inputArray[i];
+                    System.out.println(counter);
+                    tripletCounter++;
+                }  else {
+                    previousValue = inputArray[i];
+                    }
+                }
+                       return tripletCounter;
+            }
+
+
+
+
+
 }
